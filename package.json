@@ -9,7 +9,9 @@
   "author": "Hayk Safaryan",
   "license": "ISC",
   "dependencies": {
+    "cookie-parser": "^1.1.0",
     "express": "^4.2.0",
+    "express-session": "^1.2.0",
     "hogan-express": "^0.5.2"
   }
 }
