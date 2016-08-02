@@ -24,7 +24,8 @@ else {
   //production specific settings
   app.use(session({secret:config.sessionSecret,
     store: new connectMongo({
-      url:config.dbURL,
+      // url:config.dbURL,
+      mongoose_connection:mongoose.connections[0],
       // url:"mongodb://haykccuser:marcopolo@ds139645.mlab.com:39645/haykchatcat",
 
       stringify:true
