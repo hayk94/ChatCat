@@ -6,6 +6,8 @@ var session = require('express-session');
 var config = require('./config/config.js');
 var connectMongo = require('connect-mongo')(session);
 var mongoose = require('mongoose').connect(config.dbURL);
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 app.set('views',path.join(__dirname, 'views'));
 app.engine('html',require('hogan-express'));
@@ -33,23 +35,26 @@ else {
   }));
 }
 
-var userSchema = mongoose.Schema({
-  username:String,
-  password:String,
-  fullname:String
-});
+// var userSchema = mongoose.Schema({
+//   username:String,
+//   password:String,
+//   fullname:String
+// });
+//
+// var Person = mongoose.model('users', userSchema);
+//
+// var John = new Person({
+//   username:'johndoe',
+//   password:'mpoloz',
+//   fullname:'John Doe'
+// });
+//
+// John.save(function (err) {
+//   console.log('Done!');
+// });
 
-var Person = mongoose.model('users', userSchema);
 
-var John = new Person({
-  username:'johndoe',
-  password:'mpoloz',
-  fullname:'John Doe'
-});
-
-John.save(function (err) {
-  console.log('Done!');
-});
+require('./auth/passportauth.js')(passport,FacebookStrategy,config,mongoose);
 require('./routes/routes.js')(express,app);
 
 app.listen(3000, function () {
