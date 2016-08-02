@@ -1,4 +1,9 @@
 {
   "dbURL":"mongodb://haykccuser:marcopolo@ds139645.mlab.com:39645/haykchatcat",
-  "sessionSecret":"marcopololoz"
+  "sessionSecret":"marcopololoz",
+  "fb": {
+    "appID": "278072189229642",
+    "appSecret":"e60a7cbb903a43d817e4c6aefc2ed73f",
+    "callbackURL":"http://localhost:3000/auth/facebook/callback"
+  }
 }
