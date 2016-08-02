@@ -1,0 +1,9 @@
+body {
+    width: 100%;
+}
+
+.cr-container {
+    min-width: 500px;
+    width: 35%;
+    margin: auto;
+}

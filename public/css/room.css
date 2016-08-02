@@ -1,0 +1,9 @@
+body {
+    width: 100%;
+}
+
+.rm-container {
+    min-width: 500px;
+    width: 36%;
+    margin: auto;
+}

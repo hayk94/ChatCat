@@ -1,0 +1,14 @@
+body {
+    width: 100%;
+}
+
+.hm-container {
+    text-align: center;
+    min-width: 350px;
+    width: 25%;
+    margin: auto;
+}
+
+.hm-container>a>img:hover {
+    opacity: 0.8;
+}
