@@ -14,8 +14,8 @@ passport.serializeUser(function (user,done) {
 passport.deserializeUser(function (id, done) {
   userModel.findById(id,function (err,user) {
     done(err, user);
-  })
-})
+  });
+});
   passport.use(new FacebookStrategy({
     clientID: config.fb.appID,
     clientSecret: config.fb.appSecret,
