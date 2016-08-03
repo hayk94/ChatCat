@@ -59,9 +59,17 @@ app.use(passport.session());
 require('./auth/passportauth.js')(passport,FacebookStrategy,config,mongoose);
 require('./routes/routes.js')(express,app,passport);
 
-app.listen(3000, function () {
-  console.log('ChatCat working on Port 3000');
-  console.log('Mode: ' + env);
-  console.log("HAYK" + config.dbURL);
+// app.listen(3000, function () {
+//   console.log('ChatCat working on Port 3000');
+//   console.log('Mode: ' + env);
+//   console.log("HAYK" + config.dbURL);
+//
+// });
 
+app.set("port",process.env.PORT || 3000);
+var server = require('http').createServer(app);
+var io = require('io').listen(server);
+require('./socket/socket.js')(io);
+server.listen(app.get('port'), function () {
+  console.log("ChatCAT on Port: " + app.get('port'));
 });
