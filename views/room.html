@@ -5,6 +5,59 @@
     <title>ChatCAT</title>
     <link rel="stylesheet" href="../css/normalize.css" media="screen" title="no title" charset="utf-8">
     <link rel="stylesheet" href="../css/room.css" media="screen" title="no title" charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js" charset="utf-8"></script>
+    <script type="text/javascript">
+      $(function functionName() {
+        var host = "{{config.host}}";
+        var messages = io.connect(host + "/messages");
+        var roomNum = "{{room_number}}";
+        var userName = "{{user.fullname}}";
+        var userPic = '{{user.profilePic}}';
+
+        messages.on('connect', function(event) {
+          console.log('Connection Established');
+          messages.emit('joinroom', {room:roomNum, user:userName, userPic:userPic})
+        })
+        $(document).on('keyup', '.newmessage', function(event) {
+          if (event.which === 13 && $(this).val()!='') {
+            messages.emit('newMessage', {
+              room_number:roomNum,
+              user:userName,
+              userPic:userPic,
+              message:$(this).val()
+            })
+            updateMessageFeed(userPic, $(this).val());
+            $(this).val('');
+          }
+        })
+
+        messages.on('messagefeed', function(data) {
+          var msgs = JSON.parse(data);
+          updateMessageFeed(msgs.userPic, msgs.message);
+        })
+
+        function updateMessageFeed(userPic, message) {
+          var str = "<li>";
+            str +='<div class="msgbox">';
+              str +='<div class="pic">';
+                str +='<img src="'+ userPic +'" />';
+              str +='</div>';
+              str +='<div class="msg">';
+                str +='<p>';
+                  str +=message;
+                str +='</p>';
+              str +='</div>';
+            str +='</div>';
+          str +='</li>';
+          $(str).hide().prependTo($('.message')).slideDown(100, function() {
+            //Stuff to do *after* the animation takes place
+          });
+          console.log(str);
+        }
+
+      })
+    </script>
   </head>
   <body>
     <div class="rm-container">
@@ -18,18 +71,7 @@
       </div>
       <div class="rm-message">
         <ul class="message">
-          <li>
-            <div class="msgbox">
-              <div class="pic">
-                <img src="{{user.profilePic}}" />{{user.fullname}}
-              </div>
-              <div class="msg">
-                <p>
-                  Hi there this looks nice !
-                </p>
-              </div>
-            </div>
-          </li>
+
         </ul>
       </div>
       <div class="rm-users">
