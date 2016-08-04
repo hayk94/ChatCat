@@ -56,12 +56,13 @@
           console.log(str);
         }
         messages.on('updateUsersList', function(data) {
+          console.log('messages.on updateUsersList');
           var userlist = JSON.parse(data);
           $('.users').html('');
           for (var i = 0; i < userlist.length; i++) {
             // userlist[i]
             var str = '<li><img src="'+ userlist[i].userPic +'" /><h5>'+ userlist[i].user +'</h5></li>';
-
+            console.log(str);
             $(str).prependTo($('.users'));
           }
           console.log(str);

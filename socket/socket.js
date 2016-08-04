@@ -29,7 +29,9 @@ module.exports = function (io,rooms) {
       socket.to(room).emit('updateUsersList',JSON.stringify(userlist));
       if (updateALL) {
         socket.broadcast.to(room).emit('updateUsersList', JSON.stringify(userlist));
+        console.log('updateALL triggered');
       }
+      console.log('updateUsersList function triggered');
     }
     socket.on('updateList', function(data) {
       updateUsersList(data.room);
