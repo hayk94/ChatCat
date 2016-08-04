@@ -11,7 +11,7 @@
       $(function functionName() {
         var host = "{{config.host}}";
         var messages = io.connect(host + "/messages");
-        var roomNum = "{{room_number}}";
+        var roomNum = {{room_number}};
         var userName = "{{user.fullname}}";
         var userPic = '{{user.profilePic}}';
 
