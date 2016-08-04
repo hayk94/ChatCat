@@ -4,7 +4,7 @@
   "fb": {
     "appID": "278072189229642",
     "appSecret":"e60a7cbb903a43d817e4c6aefc2ed73f",
-    "callbackURL":"https://calm-gorge-66800.herokuapp.com/auth/facebook/callback"
+    "callbackURL":"http://calm-gorge-66800.herokuapp.com/auth/facebook/callback"
   },
   "host":"https://calm-gorge-66800.herokuapp.com/"
 }
