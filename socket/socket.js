@@ -20,8 +20,8 @@ module.exports = function (io,rooms) {
       socket.broadcast.to(data.room_number).emit('messagefeed', JSON.stringify(data));
     });
     function updateUsersList(room, updateALL) {
-      // var getUsers = io.of('/messages').clients(room); OLD VERSION
-      var getUsers = io.of('/messages').in(room).clients;
+      var getUsers = io.of('/messages').clients(room); //OLD VERSION
+      // var getUsers = io.of('/messages').in(room).clients; // NEW VERSION
       var userlist = [];
       for (var i in getUsers) {
         userlist.push({user:getUsers[i].username, userPic:getUsers[i].userPic});
